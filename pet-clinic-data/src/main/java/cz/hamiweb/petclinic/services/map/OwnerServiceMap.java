@@ -6,7 +6,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService  {
+public class OwnerServiceMap extends AbstractMapService<Owner> implements OwnerService  {
 
     @Override
     public Owner findByLastName(@NonNull String lastName) {
