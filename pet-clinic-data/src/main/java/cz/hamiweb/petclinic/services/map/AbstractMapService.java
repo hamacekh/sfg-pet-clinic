@@ -1,15 +1,13 @@
 package cz.hamiweb.petclinic.services.map;
 
+import cz.hamiweb.petclinic.model.BaseEntity;
 import cz.hamiweb.petclinic.services.CrudService;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-public abstract class AbstractMapService<T, ID> implements CrudService<T, ID> {
+public abstract class AbstractMapService<T extends BaseEntity, ID extends Long> implements CrudService<T, ID> {
 
-    protected Map<ID, T> map = new HashMap<>();
+    protected Map<Long, T> map = new HashMap<>();
 
     public Set<T> findAll(){
         return new HashSet<>(map.values());
@@ -19,9 +17,16 @@ public abstract class AbstractMapService<T, ID> implements CrudService<T, ID> {
         return map.get(id);
     }
 
-    public T save(ID id, T object){
-        map.put(id, object);
-        return object;
+    public T save(T object){
+        if(object != null){
+            if(object.getId() == null){
+                object.setId(getNextId());
+            }
+            map.put(object.getId(), object);
+            return object;
+        }else{
+            throw new RuntimeException("Cannot save null object.");
+        }
     }
 
     public void deleteById(ID id){
@@ -30,6 +35,13 @@ public abstract class AbstractMapService<T, ID> implements CrudService<T, ID> {
 
     public void delete(T object){
         map.entrySet().removeIf(entry -> entry.getValue().equals(object));
+    }
+
+    private Long getNextId(){
+        if(map.isEmpty())
+            return 1L;
+        else
+            return Collections.max(map.keySet()) + 1;
     }
 
 }
