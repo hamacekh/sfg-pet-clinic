@@ -3,8 +3,9 @@ package cz.hamiweb.petclinic.services.map;
 import cz.hamiweb.petclinic.model.Owner;
 import cz.hamiweb.petclinic.services.OwnerService;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService  {
 
     @Override
