@@ -5,13 +5,13 @@
     <title>Vet page</title>
 </head>
 <body>
-    <h1>Vets list</h1>
-    <table>
+    <h2 th:text="#{vetsList}">Vets list</h2>
+    <table class="table table-stripped">
         <thead>
         <tr>
-            <th>Id</th>
-            <th>First name</th>
-            <th>Last name</th>
+            <th th:text="#{id}">Id</th>
+            <th th:text="#{firstName}">First name</th>
+            <th th:text="#{lastName}">Last name</th>
         </tr>
         </thead>
         <tbody>
