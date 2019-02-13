@@ -1,9 +1,12 @@
 package cz.hamiweb.petclinic.bootstrap;
 
 import cz.hamiweb.petclinic.model.Owner;
+import cz.hamiweb.petclinic.model.PetType;
 import cz.hamiweb.petclinic.model.Vet;
 import cz.hamiweb.petclinic.services.OwnerService;
+import cz.hamiweb.petclinic.services.PetTypeService;
 import cz.hamiweb.petclinic.services.VetService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -12,14 +15,27 @@ public class DataLoader implements CommandLineRunner {
 
     private final OwnerService ownerService;
     private final VetService vetService;
+    private final PetTypeService petTypeService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService) {
+    @Autowired
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
+        this.petTypeService = petTypeService;
     }
 
     @Override
     public void run(String... args) throws Exception {
+        PetType dog = new PetType();
+        dog.setName("Dog");
+        PetType savedDog = petTypeService.save(dog);
+
+        PetType cat = new PetType();
+        dog.setName("Cat");
+        PetType savedCat = petTypeService.save(dog);
+
+
+
         Owner owner = new Owner();
         owner.setFirstName("Jack");
         owner.setLastName("Sparrw");
