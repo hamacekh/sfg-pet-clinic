@@ -6,6 +6,7 @@ import cz.hamiweb.petclinic.model.PetType;
 import cz.hamiweb.petclinic.model.Vet;
 import cz.hamiweb.petclinic.services.OwnerService;
 import cz.hamiweb.petclinic.services.PetTypeService;
+import cz.hamiweb.petclinic.services.SpecialityService;
 import cz.hamiweb.petclinic.services.VetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -19,12 +20,14 @@ public class DataLoader implements CommandLineRunner {
     private final OwnerService ownerService;
     private final VetService vetService;
     private final PetTypeService petTypeService;
+    private final SpecialityService specialityService;
 
     @Autowired
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
+        this.specialityService = specialityService;
     }
 
     @Override
@@ -45,7 +48,6 @@ public class DataLoader implements CommandLineRunner {
         owner.setAddress("123 Brickerel");
         owner.setCity("Miami");
         owner.setTelephone("123456789");
-        ownerService.save(owner);
 
         Pet pet1 = new Pet();
         pet1.setName("Jacks dog");
@@ -53,6 +55,7 @@ public class DataLoader implements CommandLineRunner {
         pet1.setBirthDate(LocalDate.now());
         owner.getPets().add(pet1);
 
+        ownerService.save(owner);
 
         Owner owner2 = new Owner();
         owner2.setFirstName("Harry");
@@ -60,13 +63,13 @@ public class DataLoader implements CommandLineRunner {
         owner2.setAddress("123 Brickerel");
         owner2.setCity("Miami");
         owner2.setTelephone("123456789");
-        ownerService.save(owner2);
-
         Pet pet2 = new Pet();
         pet2.setName("Harrys pet");
         pet2.setPetType(savedCat);
         pet2.setBirthDate(LocalDate.now());
         owner2.getPets().add(pet2);
+
+        ownerService.save(owner2);
 
 
         Vet vet1 = new Vet();
