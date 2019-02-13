@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class VetController {
 
-    public VetService vetService;
+    private final VetService vetService;
 
     @Autowired
     public VetController(VetService vetService) {
