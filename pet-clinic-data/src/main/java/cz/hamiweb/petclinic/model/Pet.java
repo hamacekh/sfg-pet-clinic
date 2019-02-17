@@ -1,11 +1,16 @@
 package cz.hamiweb.petclinic.model;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
+@Entity
 public class Pet extends BaseEntity {
 
     private LocalDate birthDate;
+    @ManyToOne
     private Owner owner;
+    @ManyToOne
     private PetType petType;
     private String name;
 
