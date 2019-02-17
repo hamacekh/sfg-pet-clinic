@@ -1,8 +1,12 @@
 package cz.hamiweb.petclinic.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Pet extends BaseEntity {
@@ -13,6 +17,8 @@ public class Pet extends BaseEntity {
     @ManyToOne
     private PetType petType;
     private String name;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
+    private Set<Visit> visits = new HashSet<>();
 
 
     public LocalDate getBirthDate() {
@@ -45,5 +51,13 @@ public class Pet extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Visit> getVisits() {
+        return visits;
+    }
+
+    public void setVisits(Set<Visit> visits) {
+        this.visits = visits;
     }
 }

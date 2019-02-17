@@ -1,11 +1,18 @@
 package cz.hamiweb.petclinic.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
+@Entity
 public class Visit extends BaseEntity {
 
     LocalDateTime dateTime;
+    @Lob
     String description;
+
+    @ManyToOne
     Pet pet;
 
     public LocalDateTime getDateTime() {
