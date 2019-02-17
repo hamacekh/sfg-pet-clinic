@@ -10,11 +10,13 @@ import java.time.LocalDateTime;
 @Table(name = "visits")
 public class Visit extends BaseEntity {
 
-    LocalDateTime dateTime;
+    private LocalDateTime dateTime;
     @Lob
+    private
     String description;
 
     @ManyToOne
+    private
     Pet pet;
 
     public LocalDateTime getDateTime() {
