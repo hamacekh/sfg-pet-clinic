@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "vets")
 public class Vet extends Person {
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

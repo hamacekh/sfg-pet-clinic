@@ -1,14 +1,12 @@
 package cz.hamiweb.petclinic.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "pets")
 public class Pet extends BaseEntity {
 
     private LocalDate birthDate;
