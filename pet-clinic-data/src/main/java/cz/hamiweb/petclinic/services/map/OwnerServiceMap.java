@@ -7,6 +7,8 @@ import cz.hamiweb.petclinic.services.PetService;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class OwnerServiceMap extends AbstractMapService<Owner> implements OwnerService  {
 
@@ -34,7 +36,7 @@ public class OwnerServiceMap extends AbstractMapService<Owner> implements OwnerS
     }
 
     @Override
-    public Owner findByLastName(@NonNull String lastName) {
-        return map.values().stream().filter(owner -> lastName.equals(owner.getLastName())).findAny().orElse(null);
+    public Optional<Owner> findByLastName(@NonNull String lastName) {
+        return map.values().stream().filter(owner -> lastName.equals(owner.getLastName())).findAny();
     }
 }

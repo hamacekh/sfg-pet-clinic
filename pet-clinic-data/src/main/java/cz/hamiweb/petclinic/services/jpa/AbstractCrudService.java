@@ -4,6 +4,7 @@ import cz.hamiweb.petclinic.services.CrudService;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 public abstract class AbstractCrudService<T, R extends CrudRepository<T, Long>> implements CrudService<T, Long> {
@@ -15,8 +16,8 @@ public abstract class AbstractCrudService<T, R extends CrudRepository<T, Long>> 
     }
 
     @Override
-    public T findById(Long aLong) {
-        return repository.findById(aLong).orElse(null);
+    public Optional<T> findById(Long aLong) {
+        return repository.findById(aLong);
     }
 
     @Override

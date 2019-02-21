@@ -4,6 +4,8 @@ import cz.hamiweb.petclinic.model.Owner;
 import cz.hamiweb.petclinic.repositories.OwnerRepository;
 import cz.hamiweb.petclinic.services.OwnerService;
 
+import java.util.Optional;
+
 public class OwnerServiceJpa extends AbstractCrudService<Owner, OwnerRepository> implements OwnerService {
 
     public OwnerServiceJpa(OwnerRepository ownerRepository) {
@@ -11,7 +13,7 @@ public class OwnerServiceJpa extends AbstractCrudService<Owner, OwnerRepository>
     }
 
     @Override
-    public Owner findByLastName(String lastName) {
-        return repository.findByLastName(lastName).orElse(null);
+    public Optional<Owner> findByLastName(String lastName) {
+        return repository.findByLastName(lastName);
     }
 }
