@@ -4,12 +4,14 @@ import cz.hamiweb.petclinic.model.Owner;
 import cz.hamiweb.petclinic.model.Pet;
 import cz.hamiweb.petclinic.services.OwnerService;
 import cz.hamiweb.petclinic.services.PetService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
+@Profile("testing")
 public class OwnerServiceMap extends AbstractMapService<Owner> implements OwnerService  {
 
     private final PetService petService;

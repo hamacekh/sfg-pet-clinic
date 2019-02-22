@@ -4,9 +4,11 @@ import cz.hamiweb.petclinic.model.Vet;
 import cz.hamiweb.petclinic.services.SpecialityService;
 import cz.hamiweb.petclinic.services.VetService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 @Service
+@Profile("testing")
 public class VetServiceMap extends AbstractMapService<Vet> implements VetService {
 
     private final SpecialityService specialityService;

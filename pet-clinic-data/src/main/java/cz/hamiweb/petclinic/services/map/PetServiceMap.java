@@ -3,9 +3,11 @@ package cz.hamiweb.petclinic.services.map;
 import cz.hamiweb.petclinic.model.Pet;
 import cz.hamiweb.petclinic.services.PetService;
 import cz.hamiweb.petclinic.services.PetTypeService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 @Service
+@Profile("testing")
 public class PetServiceMap extends AbstractMapService<Pet> implements PetService {
 
     private final PetTypeService petTypeService;

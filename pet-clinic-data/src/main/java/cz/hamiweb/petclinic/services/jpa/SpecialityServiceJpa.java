@@ -4,11 +4,9 @@ import cz.hamiweb.petclinic.model.Speciality;
 import cz.hamiweb.petclinic.repositories.SpecialityRepository;
 import cz.hamiweb.petclinic.services.SpecialityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 @Service
-@Primary
 public class SpecialityServiceJpa extends AbstractCrudService<Speciality, SpecialityRepository> implements SpecialityService {
 
     @Autowired
