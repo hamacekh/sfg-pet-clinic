@@ -1,5 +1,6 @@
 package cz.hamiweb.petclinic.model;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -13,6 +14,7 @@ import java.util.Set;
 @Entity
 @Table(name = "owners")
 @Data
+@Builder
 @EqualsAndHashCode(callSuper = true)
 public class Owner extends Person{
 
