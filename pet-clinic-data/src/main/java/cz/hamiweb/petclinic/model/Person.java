@@ -1,26 +1,16 @@
 package cz.hamiweb.petclinic.model;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.MappedSuperclass;
 
+@Data
+@EqualsAndHashCode(callSuper = true)
 @MappedSuperclass
 public class Person extends BaseEntity{
 
     private String firstName;
     private String lastName;
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 }
