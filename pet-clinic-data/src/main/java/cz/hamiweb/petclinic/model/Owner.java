@@ -1,8 +1,6 @@
 package cz.hamiweb.petclinic.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -15,6 +13,8 @@ import java.util.Set;
 @Table(name = "owners")
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Owner extends Person{
 
