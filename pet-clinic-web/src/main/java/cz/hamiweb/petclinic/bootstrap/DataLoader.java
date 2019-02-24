@@ -80,20 +80,17 @@ public class DataLoader implements CommandLineRunner {
         dentistry.setDescription("dentistry");
         Speciality surgery = new Speciality();
         surgery.setDescription("surgery");
-        var savedRadiology = specialityService.save(radiology);
-        var savedDentistry = specialityService.save(dentistry);
-        var savedSurgery = specialityService.save(surgery);
 
         Vet vet1 = new Vet();
         vet1.setFirstName("John");
         vet1.setLastName("Doe");
-        vet1.getSpecialities().add(savedRadiology);
+        vet1.getSpecialities().add(radiology);
         vetService.save(vet1);
 
         Vet vet2 = new Vet();
         vet2.setFirstName("Micky");
         vet2.setLastName("Mouse");
-        vet2.getSpecialities().add(savedSurgery);
+        vet2.getSpecialities().add(surgery);
         vetService.save(vet2);
     }
 }
