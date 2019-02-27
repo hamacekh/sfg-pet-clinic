@@ -5,16 +5,23 @@ import cz.hamiweb.petclinic.model.Pet;
 import cz.hamiweb.petclinic.services.PetService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
-import java.util.Set;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.isA;
+import static org.mockito.ArgumentMatchers.notNull;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class OwnerServiceMapTest {
 
+    @InjectMocks
     private OwnerServiceMap ownerServiceMap;
 
     @Mock
@@ -22,14 +29,12 @@ class OwnerServiceMapTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.initMocks(this);
-        ownerServiceMap = new OwnerServiceMap(petService);
     }
 
     @Test
     void saveWithoutId() {
         String address = "Test address";
-        Owner saved = ownerServiceMap.save(Owner.builder().build());
+        Owner saved = ownerServiceMap.save(Owner.builder().address(address).build());
         assertNotNull(saved);
         assertEquals(saved.getAddress(), address);
         assertNotNull(saved.getId());
@@ -48,14 +53,12 @@ class OwnerServiceMapTest {
 
     @Test
     void saveWithPets(){
-        Pet rex = Pet.builder().name("Rex").build();
-        Pet fox = Pet.builder().name("Fox").build();
+        Pet rex = Pet.builder().name("Rex").id(1L).build();
+        Pet fox = Pet.builder().name("Fox").id(2L).build();
+        when(petService.save(isA(Pet.class))).thenAnswer((q) -> q.getArgument(0));
         Owner saved = ownerServiceMap.save(Owner.builder().lastName("Foo").pet(rex).pet(fox).build());
         assertEquals(2, saved.getPets().size());
-        Owner retrieved = ownerServiceMap.findById(saved.getId()).orElseThrow();
-        Set<Pet> pets = retrieved.getPets();
-        assertEquals(2, pets.size());
-        assertEquals(1, pets.stream().filter((pet -> pet.getName().equals("Fox"))).count());
+        Mockito.verify(petService, times(2)).save(notNull());
     }
 
     @Test
