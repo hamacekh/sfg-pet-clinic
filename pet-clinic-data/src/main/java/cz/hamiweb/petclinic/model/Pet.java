@@ -1,7 +1,9 @@
 package cz.hamiweb.petclinic.model;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Singular;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -23,5 +25,13 @@ public class Pet extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
     private Set<Visit> visits = new HashSet<>();
 
-
+    @Builder
+    public Pet(Long id, LocalDate birthDate, Owner owner, PetType petType, String name, @Singular Set<Visit> visits) {
+        super(id);
+        this.birthDate = birthDate;
+        this.owner = owner;
+        this.petType = petType;
+        this.name = name;
+        this.visits = visits;
+    }
 }
