@@ -1,1 +1,1 @@
-# sfg-pet-clinic
+# sfg-pet-clinic [![CircleCI](https://circleci.com/gh/hamacekh/sfg-pet-clinic.svg?style=svg)](https://circleci.com/gh/hamacekh/sfg-pet-clinic)
