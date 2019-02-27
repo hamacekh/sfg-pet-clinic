@@ -1,9 +1,6 @@
 package cz.hamiweb.petclinic.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Singular;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -14,6 +11,7 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "pets")
+@NoArgsConstructor
 public class Pet extends BaseEntity {
 
     private LocalDate birthDate;

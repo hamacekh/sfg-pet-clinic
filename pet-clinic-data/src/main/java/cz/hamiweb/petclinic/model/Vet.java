@@ -1,9 +1,6 @@
 package cz.hamiweb.petclinic.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Singular;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -12,6 +9,7 @@ import java.util.Set;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
+@NoArgsConstructor
 @Table(name = "vets")
 public class Vet extends Person {
 
