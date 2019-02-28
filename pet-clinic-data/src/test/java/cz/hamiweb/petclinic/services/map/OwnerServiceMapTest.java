@@ -11,6 +11,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.isA;
@@ -74,5 +76,34 @@ class OwnerServiceMapTest {
         assertEquals("Bob", owner.getFirstName());
         Owner ownerDoe = ownerServiceMap.findByLastName("Doe").orElseThrow();
         assertNotNull(ownerDoe);
+    }
+
+    @Test
+    void findAll() {
+        ownerServiceMap.save(Owner.builder().firstName("Martin").build());
+        ownerServiceMap.save(Owner.builder().firstName("Karel").build());
+        Set<Owner> owners = ownerServiceMap.findAll();
+        assertEquals(2, owners.size());
+    }
+
+    @Test
+    void deleteById() {
+        ownerServiceMap.save(Owner.builder().id(1L).build());
+        ownerServiceMap.save(Owner.builder().id(2L).build());
+        ownerServiceMap.deleteById(2L);
+        Set<Owner> owners = ownerServiceMap.findAll();
+        assertEquals(1, owners.size());
+        Owner retained = owners.stream().findFirst().orElseThrow();
+        assertEquals(1L, (long)retained.getId());
+    }
+
+    @Test
+    void delete() {
+        ownerServiceMap.save(Owner.builder().id(1L).firstName("Martin").build());
+        ownerServiceMap.save(Owner.builder().id(2L).firstName("Marley").build());
+        ownerServiceMap.delete(Owner.builder().id(2L).firstName("Marley").build());
+        Owner owner = ownerServiceMap.findById(1L).orElseThrow();
+        assertEquals(1, ownerServiceMap.findAll().size());
+        assertEquals(1L, (long)owner.getId());
     }
 }
