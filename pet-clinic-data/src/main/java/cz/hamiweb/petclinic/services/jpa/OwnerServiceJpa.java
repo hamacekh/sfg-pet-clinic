@@ -6,6 +6,8 @@ import cz.hamiweb.petclinic.services.OwnerService;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
+
 @Service
 public class OwnerServiceJpa extends AbstractCrudService<Owner, OwnerRepository> implements OwnerService {
 
@@ -16,5 +18,10 @@ public class OwnerServiceJpa extends AbstractCrudService<Owner, OwnerRepository>
     @Override
     public Optional<Owner> findByLastName(String lastName) {
         return repository.findByLastName(lastName);
+    }
+
+    @Override
+    public Set<Owner> findByLastNameLike(String lastName) {
+        return repository.findByLastNameLike(lastName);
     }
 }

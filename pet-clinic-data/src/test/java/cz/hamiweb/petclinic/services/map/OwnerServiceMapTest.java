@@ -106,4 +106,20 @@ class OwnerServiceMapTest {
         assertEquals(1, ownerServiceMap.findAll().size());
         assertEquals(1L, (long)owner.getId());
     }
+
+
+    @Test
+    void findByLastNameLike() {
+        ownerServiceMap.save(Owner.builder().id(1L).lastName("Martin").build());
+        ownerServiceMap.save(Owner.builder().id(2L).lastName("Marley").build());
+        ownerServiceMap.save(Owner.builder().id(3L).lastName("Tommy").build());
+        Set<Owner> owners = ownerServiceMap.findByLastNameLike("mar");
+        assertEquals(2, owners.size());
+
+        owners = ownerServiceMap.findByLastNameLike("Tommy");
+        assertEquals(1, owners.size());
+
+        owners = ownerServiceMap.findByLastNameLike("Ver");
+        assertEquals(0, owners.size());
+    }
 }
